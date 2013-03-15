@@ -11,13 +11,14 @@
 
 @interface EJHViewController ()
 @property (nonatomic, strong) id alertViewDelegate;
+@property (nonatomic, strong) id textFieldDelegate;
 @end
 
 @implementation EJHViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
@@ -33,6 +34,15 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UITextField *field = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+    field.borderStyle = UITextBorderStyleBezel;
+    [self.view addSubview:field];
+    self.textFieldDelegate = [EJHDelegateObject delegateObjectForProtocol:@protocol(UITextFieldDelegate)];
+    [self.textFieldDelegate addImplementation:^(UITextField*textField){
+        NSLog(@"textFieldShouldBecomeFirstResponder");
+        return YES;
+    }forSelector:@selector(textFieldDidBeginEditing:)];
+    field.delegate = self.textFieldDelegate;
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,13 +67,13 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 0;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

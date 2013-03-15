@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EJHViewController : UITableViewController
+@interface EJHViewController : UIViewController
 
 @end
