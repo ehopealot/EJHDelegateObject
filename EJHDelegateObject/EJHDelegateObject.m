@@ -17,6 +17,7 @@ static NSInteger counter;
 {
     NSString *className = [NSString stringWithFormat:@"%s%@%i",protocol_getName(protocol),@"_EJH_implementation_", counter++];
     Class protocolClass = objc_allocateClassPair([EJHDelegateObject class], [className cStringUsingEncoding:NSUTF8StringEncoding], 0);
+    class_addProtocol(protocolClass, protocol);
     objc_registerClassPair(protocolClass);
     EJHDelegateObject *object = [[protocolClass alloc] init];
     object.protocol = protocol;
