@@ -121,7 +121,7 @@
 				1B99827616F396170032E066 /* EJHDelegateObject.m */,
 			);
 			name = EJHDelegateObject;
-			path = classes;
+			path = ../EJHDelegateObject;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
