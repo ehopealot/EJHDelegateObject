@@ -1,4 +1,4 @@
-This little library provides a way to instantiate objects which provide implementations for methods in delegate protocols
+This little library provides a way to instantiate objects which conform to delegate protocols and to specify the implementations of the delegate methods.
 
 
 
