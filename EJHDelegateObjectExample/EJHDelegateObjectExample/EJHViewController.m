@@ -39,10 +39,10 @@
     field.borderStyle = UITextBorderStyleBezel;
     [self.view addSubview:field];
     self.textFieldDelegate = [EJHDelegateObject delegateObjectForProtocol:@protocol(UITextFieldDelegate)];
-    [self.textFieldDelegate addImplementation:^(UITextField*textField){
+    [self.textFieldDelegate addSelector:@selector(textFieldDidBeginEditing:) withImplementation:^(UITextField*textField){
         NSLog(@"textFieldShouldBecomeFirstResponder");
         return YES;
-    }forSelector:@selector(textFieldDidBeginEditing:)];
+    }];
     field.delegate = self.textFieldDelegate;
     
     if(class_conformsToProtocol([self.textFieldDelegate class], @protocol(UITextFieldDelegate))){
@@ -60,9 +60,9 @@
 {
     [super viewDidAppear:animated];
     self.alertViewDelegate = [EJHDelegateObject delegateObjectForProtocol:@protocol(UIAlertViewDelegate)];
-    [self.alertViewDelegate addImplementation:^(UIAlertView* alertView, NSInteger buttonIndex){
+    [self.alertViewDelegate addSelector:@selector(alertView:didDismissWithButtonIndex:) withImplementation:^(UIAlertView* alertView, NSInteger buttonIndex){
         NSLog(@"%@ dismissed with index %i", alertView, buttonIndex);
-    } forSelector:@selector(alertView:didDismissWithButtonIndex:)];
+    }];
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Example" message:@"My delegate is an EJHDelegateObject" delegate:self.alertViewDelegate cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     [alertView show];

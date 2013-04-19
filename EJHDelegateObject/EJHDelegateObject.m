@@ -13,7 +13,7 @@ static NSInteger counter;
 
 @implementation EJHDelegateObject
 
-+ (id)delegateObjectForProtocol:(Protocol *)protocol 
++ (id)delegateObjectForProtocol:(Protocol *)protocol
 {
     NSString *className = [NSString stringWithFormat:@"%s%@%i",protocol_getName(protocol),@"_EJH_implementation_", counter++];
     Class protocolClass = objc_allocateClassPair([EJHDelegateObject class], [className cStringUsingEncoding:NSUTF8StringEncoding], 0);
@@ -24,16 +24,14 @@ static NSInteger counter;
     return object;
 }
 
-
-- (void)addImplementation:(id)blockImplementation forSelector:(SEL)selector
-{
+- (void)addSelector:(SEL)selector withImplementation:(id)blockImplementation {
     unsigned int outCount;
     struct objc_method_description *methodDescriptions = protocol_copyMethodDescriptionList(self.protocol, NO, YES, &outCount);
     struct objc_method_description description;
     BOOL descriptionFound = NO;
-    for (int i = 0; i < outCount; i++){
+    for (int i = 0; i < outCount; i++) {
         description = methodDescriptions[i];
-        if (description.name == selector){
+        if (description.name == selector) {
             descriptionFound = YES;
             break;
         }

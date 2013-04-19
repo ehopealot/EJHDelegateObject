@@ -13,6 +13,7 @@
 + (id)delegateObjectForProtocol:(Protocol*) protocol;
 
 @property (nonatomic, strong) Protocol *protocol;
-- (void)addImplementation:(id)blockImplementation forSelector:(SEL)selector;
+
+- (void)addSelector:(SEL)selector withImplementation:(id)blockImplementation;
 
 @end
